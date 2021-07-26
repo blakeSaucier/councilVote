@@ -1,4 +1,5 @@
-﻿[<EntryPoint>]
+﻿open Expecto
+
+[<EntryPoint>]
 let main argv =
-    printfn "Hello world"
-    0
+    runTestsInAssemblyWithCLIArgs [] argv

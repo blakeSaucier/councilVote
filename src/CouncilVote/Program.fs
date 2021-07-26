@@ -1,20 +1,19 @@
 module CouncilVote.Program
 
-open System
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Hosting
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer
+open CouncilVote.Api.Router
 open Repository
 open Giraffe
 
 let webApp =
     choose [
-        route "/ping" >=> text "pong"
         route "/health" >=> json {| Status = "ok" |}
-        routef "/test/%O" (fun (id:Guid) -> json (getMeasureById id) )] 
+        councilVoteRouter ] 
 
 type Startup() =
     member _.Configure (app : IApplicationBuilder)

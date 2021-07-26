@@ -1,11 +1,12 @@
 ﻿module CouncilVote.Test.DomainTests
 
+open System
 open CouncilVote.Domain.Models
 open CouncilVote.Domain.UseCases
 open Expecto
 
 let testMeasure =
-  { Id = 24
+  { Id = Guid.NewGuid()
     Subject = "Test Measure"
     Description = "A Description"
     Votes = [ ]
@@ -41,7 +42,7 @@ let measureConfigTests = testList "Measure Configuration tests" [
   
   test "Measure should complete if required voter votes FOR" {
     let measure =
-      { testMeasure with Configuration = [ MinimumNumberOfVotes 4; VotersWithNameInFavor ["Hank"] ] }
+      { testMeasure with Configuration = [ MinimumNumberOfVotes 4; RequiredVotersInFavor ["Hank"] ] }
     
     let res = 
       addVote { VoterName = "James"; Vote = No } measure

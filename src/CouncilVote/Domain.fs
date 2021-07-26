@@ -1,12 +1,14 @@
 ﻿namespace CouncilVote.Domain
 
+open System
+
 module Models =
     
     /// Configurable completion rules for a 'Measure' 
     type MeasureCompletionRule =
     | MinimumNumberOfVotes of int
     | MinimumYesPercentage of float
-    | VotersWithNameInFavor of string list
+    | RequiredVotersInFavor of string list
 
     type MeasureState = Active | Passed | Failed
 
@@ -17,7 +19,7 @@ module Models =
         Vote: Vote }
 
     type Measure = 
-      { Id: int
+      { Id: Guid
         Subject: string
         Description: string
         Votes: MeasureVote list
@@ -29,7 +31,7 @@ module UseCases =
   open Models
   open CouncilVote.Common
   
-  /// Calculate the percentage of votes For a measure
+  /// Calculate the percentage of yes votes For a measure
   let calculateYesPercent measure =
     let yesVotes = 
       measure.Votes 
@@ -39,7 +41,7 @@ module UseCases =
     let allVotes = float measure.Votes.Length
     if allVotes = 0.0 then 0.0 else yesVotes / allVotes
 
-  /// Check if a minimum yes percentage has been configured
+  /// Check if a minimum yes percentage has been configured, default to 50% as the threshold
   let getMeasureYesThreshold (measure: Measure) =
     let ``fifty percent in favor`` = 0.5
     let threshold =
@@ -59,20 +61,20 @@ module UseCases =
     | MinimumYesPercentage minYesPercent ->
       let yesPercent = calculateYesPercent measure
       yesPercent >= minYesPercent
-    | VotersWithNameInFavor names ->
+    | RequiredVotersInFavor names ->
       names |> List.forall (fun name ->
         let vote = measure.Votes |> List.tryFind (fun v -> v.VoterName = name)
         match vote with
         | None -> false // Have not cast a vote on this measure
         | Some v -> v.Vote = Yes) // They have voted 'Yes'
 
-  /// Evaluate if a Measure has completed based on it's configuration
+  /// Evaluate if a Measure has completed based on its configuration
   let hasMeasureCompleted (measure: Measure) =
     measure.Configuration 
       |> List.map (evaluateMeasureRule measure)
       |> List.mustPass
 
-  /// Evaluate if a measure has passed based on it's yes votes
+  /// Evaluate if a measure has passed based on its yes votes
   let hasMeasurePassed (measure: Measure) =
     let yesPercent = calculateYesPercent measure
     let yesThreshold = getMeasureYesThreshold measure
@@ -94,3 +96,15 @@ module UseCases =
       evaluateMeasureStatus measure
     | Passed -> measure
     | Failed -> measure
+    
+  let createMeasure (subject: string) (description: string) (config: MeasureCompletionRule list) =
+    match config with
+    | [  ] -> Error "Measure must contain a completion rule"
+    | _ -> Ok { Id = Guid.NewGuid()
+                Subject = subject
+                Description = description
+                Status = Active
+                Votes = []
+                Configuration = config }
+    
+    

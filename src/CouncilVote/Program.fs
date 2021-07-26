@@ -1,22 +1,25 @@
 module CouncilVote.Program
 
+open System
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Hosting
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer
+open Repository
 open Giraffe
 
 let webApp =
     choose [
         route "/ping" >=> text "pong"
-        route "/health" >=> json {| Status = "ok" |} ] 
+        route "/health" >=> json {| Status = "ok" |}
+        routef "/test/%O" (fun (id:Guid) -> json (getMeasureById id) )] 
 
 type Startup() =
     member _.Configure (app : IApplicationBuilder)
-                     (env : IHostEnvironment)
-                     (loggerFactory : ILoggerFactory) =
+                       (env : IHostEnvironment)
+                       (loggerFactory : ILoggerFactory) =
         app.UseGiraffe webApp
         app.UseStaticFiles() |> ignore
         app.UseSpaStaticFiles()
@@ -24,6 +27,7 @@ type Startup() =
             spa.Options.SourcePath <- "ClientApp"
             if env.IsDevelopment() then
                 spa.UseReactDevelopmentServer(npmScript = "start"))
+        seedData ()
 
     member _.ConfigureServices (services : IServiceCollection) =
         services.AddGiraffe() |> ignore

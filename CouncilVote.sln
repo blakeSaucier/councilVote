@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{28EE9DFB-813B-4726-82C7-B94F32367001}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CouncilVote", "src\CouncilVote\CouncilVote.fsproj", "{598C0693-7ADF-442E-B28E-BDA7B5159C56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D2EB8CBF-F237-4EBA-87FE-4D6F17746480}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CouncilVote.Test", "test\CouncilVote.Test\CouncilVote.Test.fsproj", "{6C2031C0-55A0-4C43-9E49-40B0100EEE0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{598C0693-7ADF-442E-B28E-BDA7B5159C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{598C0693-7ADF-442E-B28E-BDA7B5159C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{598C0693-7ADF-442E-B28E-BDA7B5159C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{598C0693-7ADF-442E-B28E-BDA7B5159C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E210DB96-3124-488B-9BBF-B8A1D6340963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E210DB96-3124-488B-9BBF-B8A1D6340963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E210DB96-3124-488B-9BBF-B8A1D6340963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E210DB96-3124-488B-9BBF-B8A1D6340963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C2031C0-55A0-4C43-9E49-40B0100EEE0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C2031C0-55A0-4C43-9E49-40B0100EEE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C2031C0-55A0-4C43-9E49-40B0100EEE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C2031C0-55A0-4C43-9E49-40B0100EEE0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{598C0693-7ADF-442E-B28E-BDA7B5159C56} = {28EE9DFB-813B-4726-82C7-B94F32367001}
+		{6C2031C0-55A0-4C43-9E49-40B0100EEE0C} = {D2EB8CBF-F237-4EBA-87FE-4D6F17746480}
+	EndGlobalSection
+EndGlobal

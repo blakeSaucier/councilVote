@@ -16,22 +16,22 @@ type CreateMeasureDto =
     minimumYesSelected: bool
     minimumYesPercent: int }
 
-let validateMinimumVotes (createMeasure: CreateMeasureDto) =
+let validateMinimumVotes createMeasure =
     match createMeasure.minimumVotesSelected, createMeasure.minimumVotes with
     | true, votes when votes <= 0 -> Error "Cannot have negative votes"
     | _ -> Ok createMeasure
     
-let validateMinimumVotePercent (createMeasure: CreateMeasureDto) =    
+let validateMinimumVotePercent createMeasure =    
     match createMeasure.minimumYesSelected, createMeasure.minimumYesPercent with
     | true, percent when percent <= 0 -> Error "Cannot have negative vote percent"
     | _ -> Ok createMeasure
     
-let validateConfigurations (createMeasure: CreateMeasureDto) =
+let validateConfigurations createMeasure =
     match createMeasure.minimumVotesSelected, createMeasure.minimumYesSelected with
     | false, false -> Error "A configuration must be selected"
     | _ -> Ok createMeasure
     
-let validate (createMeasure: CreateMeasureDto) =
+let validate createMeasure =
     validateConfigurations createMeasure
     |> Result.bind validateMinimumVotes
     |> Result.bind validateMinimumVotePercent
@@ -47,8 +47,8 @@ let createMeasureHandler : HttpHandler =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         task {
             let! body = ctx.ReadBodyFromRequestAsync()
-            let parsed = Json.deserialize<CreateMeasureDto> body
-            match validate parsed with
+            let dto = Json.deserialize<CreateMeasureDto> body
+            match validate dto with
             | Ok newMeasure ->
                 let measure =
                     { Id = Guid.NewGuid()

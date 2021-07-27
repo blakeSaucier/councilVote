@@ -16,13 +16,14 @@ let testMeasure =
 let measureConfigTests = testList "Measure Configuration tests" [
   test "Measure should complete if Min Yes % and Min Num of votes is met" {
     let measure =
-      { testMeasure with Configuration = [ MinimumYesPercentage 0.75; MinimumNumberOfVotes 4 ] }
+      { testMeasure with Configuration = [ MinimumYesPercentage 0.79; MinimumNumberOfVotes 5 ] }
     
     let res = 
       addVote { VoterName = "James"; Vote = Yes } measure
       |> addVote { VoterName = "Blake"; Vote = Yes }
       |> addVote { VoterName = "Alan"; Vote = No }
       |> addVote { VoterName = "Hank"; Vote = Yes }
+      |> addVote { VoterName = "Daniel"; Vote = Yes }
       
     Expect.equal res.Status Passed "Should have completed and passed"
   }

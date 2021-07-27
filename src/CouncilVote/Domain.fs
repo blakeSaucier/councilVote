@@ -78,7 +78,7 @@ module UseCases =
   let hasMeasurePassed (measure: Measure) =
     let yesPercent = calculateYesPercent measure
     let yesThreshold = getMeasureYesThreshold measure
-    yesPercent >= yesThreshold
+    yesPercent > yesThreshold
 
   /// Check if a measure has completed then evaluate the percentage of yes votes
   let evaluateMeasureStatus (measure: Measure) =

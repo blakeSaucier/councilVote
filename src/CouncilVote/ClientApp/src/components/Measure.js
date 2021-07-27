@@ -25,12 +25,6 @@ function Measure(props) {
       fetchMeasure();
     }, [])
     
-    const statusBadeColor = status => {
-        switch (status.case) {
-            case 'Active':
-        }
-    }
-    
     return (
         <div>
             <h1 className="display-4">{measure.subject}</h1>

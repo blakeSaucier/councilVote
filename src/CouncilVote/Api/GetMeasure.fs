@@ -6,7 +6,7 @@ open FSharp.Control.Tasks
 open Giraffe
 open CouncilVote.Repository
 
-let getMeasure (id: Guid) =
+let getMeasureHandler (id: Guid) =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         task {
             return! match getMeasureById id with

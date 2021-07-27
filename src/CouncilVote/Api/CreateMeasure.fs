@@ -43,7 +43,7 @@ let getConfigurations createMeasure =
         if create.minimumYesSelected then [ MinimumYesPercentage ((float create.minimumYesPercent) / 100.0) ] else []
     (getMinVotesConfig createMeasure) @ (getMinVotePercent createMeasure)
 
-let createMeasure : HttpHandler =
+let createMeasureHandler : HttpHandler =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         task {
             let! body = ctx.ReadBodyFromRequestAsync()

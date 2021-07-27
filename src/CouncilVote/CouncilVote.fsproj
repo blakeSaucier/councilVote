@@ -15,6 +15,7 @@
         <Compile Include="Repository.fs" />
         <Compile Include="Api\CreateMeasure.fs" />
         <Compile Include="Api\GetMeasure.fs" />
+        <Compile Include="Api\Vote.fs" />
         <Compile Include="Api\Router.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>

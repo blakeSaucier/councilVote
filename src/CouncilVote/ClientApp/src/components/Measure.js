@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, FormGroup, Label, Input, Button, Row, Col } from 'reactstrap';
+import CastVote from './CastVote';
 import { getMeasure } from '../repo/loadData';
+
 
 function Measure(props) {
     const [measure, setMeasure] = useState({ subject: "" });
@@ -18,6 +19,8 @@ function Measure(props) {
         <div>
             <h1 className="display-4">{measure.subject}</h1>
             <p>{measure.description}</p>
+            
+            <CastVote measureId={id}/>
         </div>
     )
 }

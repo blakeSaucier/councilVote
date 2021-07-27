@@ -8,9 +8,20 @@ const post = async (url, body) => {
     });
 }
 
+const get = async (url) => {
+    return fetch(url, {
+        method: 'GET'
+    });
+}
+
 const createMeasure = async body => {
   return await post('/api/measure', body)
       .then(res => res.json());
 }
 
-export { createMeasure };
+const getMeasure = async id => {
+    return await get(`/api/measure/${id}`)
+        .then(res => res.json());
+}
+
+export { createMeasure, getMeasure };

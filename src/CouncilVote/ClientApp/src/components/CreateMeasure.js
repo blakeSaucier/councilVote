@@ -13,13 +13,13 @@ const initialState = {
   requiredVoters: []
 }
 
-function CreateMeasure() {
+function CreateMeasure(props) {
   const [formState, setFormState] = useState(initialState)
   
   const handleSubmit = async e => {
     e.preventDefault();
     const { id } = await createMeasure(formState);
-    console.log(id);
+    props.history.push(`/measure/${id}`);
   }
   
   const formDataChanged = e => {

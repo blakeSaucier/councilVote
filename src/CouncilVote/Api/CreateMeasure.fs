@@ -1,4 +1,4 @@
-﻿module CouncilVote.Api.Handlers
+﻿module CouncilVote.Api.CreateMeasure
 
 open System
 open Microsoft.AspNetCore.Http

@@ -15,6 +15,11 @@ function CastVote(props) {
     const handleSubmit = async e => {
         e.preventDefault();
         const res = await submitVote(vote);
+        props.updateMeasure(res);
+        setVote({
+            ...vote,
+            name: ""
+        });
     }
 
     const onNameChange = e => {

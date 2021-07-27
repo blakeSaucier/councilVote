@@ -13,7 +13,7 @@ The following rules are implemented:
 
 ## Building and running 
 - Install .Net 5 SDK
-- `cd` into `src/CouncilVote`
+- `cd` into `src/CouncilVote/`
 - `dotnet run`
 
 ## Tech Stack
@@ -37,5 +37,7 @@ Because of this, I didn't split the solution into separate projects but I wanted
 - A Measure is evaluated as PASSED if it receives a majority vote (> 50%) or if a minimum percentage of YES votes was defined and that threshold was reached.
 
 ## Testing
-I added some quick tests around the domain and the use cases. Of course, it's better to have more tests but I only have limited time. 
+I added some quick tests around the domain and the use cases. Of course, it's better to have more tests but I only have limited time.
+- `cd` in `test/CouncilVote.Test/`
+- `dotnet run`
 
